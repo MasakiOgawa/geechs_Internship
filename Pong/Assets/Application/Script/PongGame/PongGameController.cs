@@ -23,8 +23,8 @@ public class PongGameController : MonoBehaviour {
 	/// </summary>
 	public Text lblPlayer2;
 
-	public RacketComponent racket1;
-	public RacketComponent racket2;
+	//public RacketComponent racket1;
+	//public RacketComponent racket2;
 
 	/// <summary>
 	/// ゲームセット時に表示するobj
@@ -78,21 +78,21 @@ public class PongGameController : MonoBehaviour {
 	/// </summary>
 	private void Update() {
 
-		UpdateRackets();
+		//UpdateRackets();
 	}
 
 
 	/// <summary>
 	/// ラケットの更新
 	/// </summary>
-	private void UpdateRackets(){
-		if (racket1 != null){
-			racket1.FixedUpdate(ballList);
-		}
-		if (racket2 != null){
-			racket2.FixedUpdate(ballList);
-		}
-	}
+	//private void UpdateRackets(){
+	//	if (racket1 != null){
+	//		racket1.FixedUpdate(ballList);
+	//	}
+	//	if (racket2 != null){
+	//		racket2.FixedUpdate(ballList);
+	//	}
+	//}
 
 
 	/// <summary>

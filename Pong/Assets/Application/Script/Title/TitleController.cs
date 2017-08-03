@@ -8,14 +8,20 @@ public class TitleController : MonoBehaviour {
 	/// ゲームをスタートする
 	/// </summary>
 	public void OnGamePlay(){
-		Mgrs.sceneMgr.LoadScene(DEFINE.SCENE_PONG_GAME);
-	}
-	
-	
-	/// <summary>
-	/// ゲームのプレイ履歴画面に遷移
-	/// </summary>
-	public void OnPlayHistory(){
+        Mgrs.sceneMgr.LoadScene(DEFINE.SCENE_PONG_GAME);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.Return))
+        {
+            Mgrs.sceneMgr.LoadScene(DEFINE.SCENE_PONG_GAME);
+        }
+    }
+/// <summary>
+/// ゲームのプレイ履歴画面に遷移
+/// </summary>
+public void OnPlayHistory(){
 		//TODO:表示処理追加
 	}
 	
