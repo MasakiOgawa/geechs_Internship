@@ -2636,7 +2636,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1492837358}
-  - component: {fileID: 1492837359}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -2662,24 +2661,6 @@ RectTransform:
   m_AnchoredPosition: {x: 1156.2224, y: 296.17987}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1492837359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1492837357}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 693ad00216d1944f2b178a10c192d5be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentBall: {fileID: 0}
-  lblPlayer1: {fileID: 0}
-  lblPlayer2: {fileID: 0}
-  racket1: {fileID: 0}
-  racket2: {fileID: 0}
-  objGameSet: {fileID: 0}
-  lblWinner: {fileID: 0}
 --- !u!1 &1593054945
 GameObject:
   m_ObjectHideFlags: 0
