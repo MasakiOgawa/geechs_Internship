@@ -11,8 +11,8 @@ public class CollisionManager : MonoBehaviour
     public bool hitPlayer2;
     public int hitWall;
 
-    private int ballState;
-    private int wallState;
+    private int ballState;  //ボールの属性を格納
+    private int wallState;  //壁の属性を格納
 
     // Use this for initialization
     void Start()
@@ -22,7 +22,7 @@ public class CollisionManager : MonoBehaviour
         hitWall = 0;
         ballState = 0;
         wallState = 0;
-}
+    }
 
     // Update is called once per frame
     void Update()
@@ -37,6 +37,8 @@ public class CollisionManager : MonoBehaviour
         {//ボールと1Pのラケットが当たった場合
             hitPlayer1 = true;
             hitPlayer2 = false;
+
+            //ボールの属性を変更
         }
         else if (col.gameObject.tag == "Racket2")
         {//ボールと2Pのラケットが当たった場合
@@ -47,15 +49,14 @@ public class CollisionManager : MonoBehaviour
         {//ボールと壁が当たった場合
             wallState = wall.GetWallState();
             ballState = ball.GetBallState();
-
-            if(ballState == 0)
+            if (ballState == 0)
             {
             }
-            else if(wallState != ballState)
+            else if (wallState != ballState)
             {
                 if (wallState == 0)
                 {
-                    wallState = ballState;
+                    wallState = ballState;  //デバッグ確認用
                     wall.SetWallState(wallState);
                 }
                 else
