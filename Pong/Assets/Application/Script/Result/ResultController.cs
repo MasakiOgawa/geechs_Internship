@@ -11,7 +11,7 @@ public class ResultController : MonoBehaviour{
     {
         if (Input.GetKey(KeyCode.Return))
         {
-            Mgrs.sceneMgr.LoadScene(DEFINE.SCENE_TITLE);
+        //    Mgrs.sceneMgr.LoadScene(DEFINE.SCENE_TITLE);
         }
     }
 
