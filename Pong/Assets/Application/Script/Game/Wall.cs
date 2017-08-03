@@ -5,13 +5,17 @@ using UnityEngine;
 public class Wall : MonoBehaviour {
 
     private int m_State;
+    private MeshRenderer m_MeshRenderer;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 
         m_State = 0;
-		
-	}
+
+        m_MeshRenderer = GetComponent<MeshRenderer>();
+        m_MeshRenderer.material.color = Color.white;
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
