@@ -87,10 +87,10 @@ public class PongGameController : MonoBehaviour {
 	/// </summary>
 	private void UpdateRackets(){
 		if (racket1 != null){
-			racket1.UpdateRacket(ballList);
+			racket1.FixedUpdate(ballList);
 		}
 		if (racket2 != null){
-			racket2.UpdateRacket(ballList);
+			racket2.FixedUpdate(ballList);
 		}
 	}
 

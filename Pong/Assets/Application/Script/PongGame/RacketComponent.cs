@@ -7,8 +7,13 @@ using System.Collections.Generic;
 /// </summary>
 public class RacketComponent : MonoBehaviour {
 
+	public float speed = 10;
 	public string axisName;
-
+	public KeyCode name;
+	//ラケット傾き  //
+	public float angle = 15;
+	public float smooth = 2.0F;
+	public float tiltAngle = 30.0F;
 	/// <summary>
 	/// 敵
 	/// </summary>
@@ -33,34 +38,42 @@ public class RacketComponent : MonoBehaviour {
 	/// ラケットの更新処理
 	/// </summary>
 	/// <param name="ball">Ball.</param>
-	public void UpdateRacket(LinkedList<BallComponent> ballList) {
-		
-		if( this.isAuto ) {
-			this.Enemy(ballList);
-		}else{
+	public void FixedUpdate(LinkedList<BallComponent> ballList) {
 
-			//速度取得
-			float axisValue = Input.GetAxis(this.axisName);
+		if (this.isAuto) {
+			this.Enemy (ballList);
+		} else {
+			float y = Input.GetAxis ("Horizontal");
 
-			//上の壁に接していてかつ移動の向きが上の場合、
-			//下の壁に接していてかつ移動の向きが下の場合は移動しない
-			if ( !(this.isWallTop && axisValue > 0 || this.isWallBotton && axisValue < 0)) {
-				transform.Translate(Vector3.up * axisValue * SPEED * Time.deltaTime);
-			}
+			Rigidbody2D rigbody = GetComponent<Rigidbody2D> ();
+
+			rigbody.AddForce(0 , y );
+		}
+
+
+	
+
+		if (Input.GetKey(name)) {
+			Debug.Log ("傾くぞ！");
+			this.gameObject.transform.rotation = Quaternion.Euler( 0, 0, angle);
+		}
+		else {
+			Debug.Log ("戻る!!");
+			this.gameObject.transform.rotation = Quaternion.Euler( 0, 0, 0);
 		}
 	}
-
 	/// <summary>
 	/// ラケットを自動で動かす
 	/// </summary>
 	/// <param name="ballList">Ball list.</param>
 	private void Enemy(LinkedList<BallComponent> ballList) {
 		if( ballList == null || ballList.Count == 0) {
-			return;
+				return;
+			}
+			BallComponent ball = ballList.Last.Value;
+			this.transform.position = new Vector3(this.transform.position.x, ball.transform.position.y, this.transform.position.z );
 		}
-		BallComponent ball = ballList.Last.Value;
-		this.transform.position = new Vector3(this.transform.position.x, ball.transform.position.y, this.transform.position.z );
-	}
+	
 
 
 
