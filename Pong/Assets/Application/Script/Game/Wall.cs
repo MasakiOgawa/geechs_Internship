@@ -26,6 +26,14 @@ public class Wall : MonoBehaviour {
         //取得ステータスが成功の場合
         if ((state == 0) | (state == 1) | (state == 2))
         {
+            //色の設定
+            switch (state)
+            {
+                case 1:  m_MeshRenderer.material.color = Color.red;  break;
+                case 2: m_MeshRenderer.material.color = Color.blue; break;
+                default: m_MeshRenderer.material.color = Color.white; break;
+            }
+
             m_State = state;
         }
         //取得ステータスが失敗の場合
