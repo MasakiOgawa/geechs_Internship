@@ -17,6 +17,8 @@ public class Ball : MonoBehaviour
     private int m_State;
     private MeshRenderer m_MeshRenderer;
 
+    public int angleCheckValue = 3;
+
     // Use this for initialization
     public void Start()
     {
@@ -31,7 +33,7 @@ public class Ball : MonoBehaviour
         SpeedUpValue = 1.1f;
         SpeedDownValue = 0.9f;
 
-        MaxSpeed = 1.5f;
+        MaxSpeed = 2.0f;
         MinSpeed = 0.5f;
 
         SetBollState(0);
@@ -82,11 +84,12 @@ public class Ball : MonoBehaviour
     public void SpeedUp()
     {
         m_rigidbody.velocity *= SpeedUpValue;
-        //if (m_rigidbody.velocity.magnitude > MaxSpeed)
-        //{
-        //    m_rigidbody.velocity.Normalize();
-        //    m_rigidbody.velocity *= MaxSpeed;
-        //}
+        if (m_rigidbody.velocity.magnitude > MaxSpeed)
+        {
+            m_rigidbody.velocity.Normalize();
+            m_rigidbody.velocity *= MaxSpeed;
+            //m_rigidbody.velocity = Vector3.ClampMagnitude(m_rigidbody.velocity, MaxSpeed);
+        }
 
     }
 
@@ -94,19 +97,24 @@ public class Ball : MonoBehaviour
     public void SpeedDown()
     {
         m_rigidbody.velocity *= SpeedDownValue;
+        if (m_rigidbody.velocity.magnitude < MinSpeed)
+        {
+            m_rigidbody.velocity.Normalize();
+            m_rigidbody.velocity *= MinSpeed;
+        }
     }
 
     //角度調整
     public void AngleCheck()
     {
-        if (Mathf.Abs(m_rigidbody.velocity.z) < 3)
+        if (Mathf.Abs(m_rigidbody.velocity.z) < angleCheckValue)
         {
-            float z = m_rigidbody.velocity.z * 3;
+            float z = m_rigidbody.velocity.z * angleCheckValue;
             m_rigidbody.velocity = new Vector3(m_rigidbody.velocity.x, m_rigidbody.velocity.y, z);
         }
-        if (Mathf.Abs(m_rigidbody.velocity.x) < 3)
+        if (Mathf.Abs(m_rigidbody.velocity.x) < angleCheckValue)
         {
-            float x = m_rigidbody.velocity.x * 3;
+            float x = m_rigidbody.velocity.x * angleCheckValue;
             m_rigidbody.velocity = new Vector3(x, m_rigidbody.velocity.y, m_rigidbody.velocity.z);
         }
     }

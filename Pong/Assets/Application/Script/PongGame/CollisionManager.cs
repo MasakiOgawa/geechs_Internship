@@ -63,16 +63,19 @@ public class CollisionManager : MonoBehaviour
                 {
                     wallState = ballState;  //デバッグ確認用
                     wall.SetWallState(wallState);
+                    Debug.Log("無色");
                 }
                 else
                 {
                     wallState = ballState;
                     wall.SetWallState(wallState);
                     ball.SpeedDown();
+                    Debug.Log("違う色");
                 }
             }
             else
             {
+                    Debug.Log("同じ色");
                 ball.SpeedUp();
             }
 
