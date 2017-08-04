@@ -2,8 +2,6 @@
 using System.Collections;
 
 public class ResultController : MonoBehaviour{
-
-
     /// <summary>
     /// タイトルへ遷移する
     /// </summary>
@@ -11,9 +9,7 @@ public class ResultController : MonoBehaviour{
     {
         if (Input.GetKey(KeyCode.Return))
         {
-        //    Mgrs.sceneMgr.LoadScene(DEFINE.SCENE_TITLE);
+            Mgrs.sceneMgr.LoadScene(DEFINE.SCENE_TITLE);
         }
     }
-
 }
-
