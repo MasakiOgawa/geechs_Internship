@@ -18,8 +18,9 @@ public class Ball : MonoBehaviour
     private MeshRenderer m_MeshRenderer;
 
     // Use this for initialization
-    void Start()
+    public void Start()
     {
+        //m_rigidbody
         m_rigidbody.AddForce(new Vector3(Random.Range(randomRange1, randomRange2),
             0.0f,
             Random.Range(randomRange1, randomRange2)));
@@ -33,14 +34,14 @@ public class Ball : MonoBehaviour
         MaxSpeed = 1.5f;
         MinSpeed = 0.5f;
 
-        //デバッグ
-        SetBollState(1);
+        SetBollState(0);
+        SetBollState(1);    //デバッグ
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        //座標の更新
     }
 
     //ボールの属性を設定
@@ -81,15 +82,32 @@ public class Ball : MonoBehaviour
     public void SpeedUp()
     {
         m_rigidbody.velocity *= SpeedUpValue;
-        if(m_rigidbody.velocity.sqrMagnitude > MaxSpeed)
-        {
-            //m_rigidbody.velocity.Normalize();
-        }
+        //if (m_rigidbody.velocity.magnitude > MaxSpeed)
+        //{
+        //    m_rigidbody.velocity.Normalize();
+        //    m_rigidbody.velocity *= MaxSpeed;
+        //}
+
     }
 
     //減速
     public void SpeedDown()
     {
         m_rigidbody.velocity *= SpeedDownValue;
+    }
+
+    //角度調整
+    public void AngleCheck()
+    {
+        if (Mathf.Abs(m_rigidbody.velocity.z) < 3)
+        {
+            float z = m_rigidbody.velocity.z * 3;
+            m_rigidbody.velocity = new Vector3(m_rigidbody.velocity.x, m_rigidbody.velocity.y, z);
+        }
+        if (Mathf.Abs(m_rigidbody.velocity.x) < 3)
+        {
+            float x = m_rigidbody.velocity.x * 3;
+            m_rigidbody.velocity = new Vector3(x, m_rigidbody.velocity.y, m_rigidbody.velocity.z);
+        }
     }
 }
