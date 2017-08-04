@@ -14,7 +14,7 @@ public class Ball : MonoBehaviour
     public float MaxSpeed;    //速度最大値
     public float MinSpeed;    //速度最小値
 
-    private int m_State;
+    private int m_State;    //0：無属性 //1：プレイヤ１ //2：プレイヤ２
     private MeshRenderer m_MeshRenderer;
 
     public int angleCheckValue = 3;

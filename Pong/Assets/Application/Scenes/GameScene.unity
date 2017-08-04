@@ -147,6 +147,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 1008596202704388, guid: c289cdf6d78d92846be251bd0be88bfb, type: 2}
+      propertyPath: m_Name
+      value: GoalArea2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1008596202704388, guid: c289cdf6d78d92846be251bd0be88bfb, type: 2}
+      propertyPath: m_TagString
+      value: GoalArea2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c289cdf6d78d92846be251bd0be88bfb, type: 2}
   m_IsPrefabParent: 0
@@ -3144,6 +3152,14 @@ Prefab:
     - target: {fileID: 4292865320372442, guid: 0907f1a3ead64c3409272271a7ee8e34, type: 2}
       propertyPath: m_RootOrder
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1740646501019318, guid: 0907f1a3ead64c3409272271a7ee8e34, type: 2}
+      propertyPath: m_Name
+      value: GoalArea1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1740646501019318, guid: 0907f1a3ead64c3409272271a7ee8e34, type: 2}
+      propertyPath: m_TagString
+      value: GoalArea1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0907f1a3ead64c3409272271a7ee8e34, type: 2}
