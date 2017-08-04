@@ -121,63 +121,71 @@ public class CollisionManager : MonoBehaviour
         }
         else if (col.gameObject.tag == "GoalArea1")
         {//1P側のゴールエリアに入った場合(2Pに得点が入る)
-            //ボールの位置の初期化
             Debug.Log("ゴールチェック");
-            this.gameObject.GetComponent<Ball>().Start();
 
             //属性の無い球が入ったら、得点は何もしない
             int ballState = this.gameObject.GetComponent<Ball>().GetBallState();
             if (ballState == 0)
             {
-                return;
+                Debug.Log("無属性");
             }
-            
-            //得点の計算
-            int score = 100;    //基本点を入れておく
-            int wallState;
-            for (int i = 0; i < wallList.Count; i++)
-            {//同じ属性の壁を数える
-                wallState = wallList[i].GetWallState();
-                if (wallState == ballState)
-                {
-                    score += 10;    //ボーナスを追加
+            else
+            {//得点の計算
+                int score = 100;    //基本点を入れておく
+                int wallState;
+                for (int i = 0; i < wallList.Count; i++)
+                {//同じ属性の壁を数える
+                    wallState = wallList[i].GetWallState();
+                    if (wallState == ballState)
+                    {
+                        score += 10;    //ボーナスを追加
+                    }
+                    wallList[i].SetWallState(0);    //属性を初期化
                 }
-                wallList[i].SetWallState(0);    //属性を初期化
 
+                //プレイヤ2に得点を渡す
+                Debug.Log(score);
+                player2.SetScore(score);
             }
-
-            //プレイヤ2に得点を渡す
-            player2.SetScore(score);
+            //ボールの初期化
+            ball.ResetPosition();
+            ball.SetBollState(0);
+            ball.StartBall(0.0f);   //1P側のほうへ
         }
         else if (col.gameObject.tag == "GoalArea2")
         {//2P側のゴールエリアに入った場合(1Pに得点が入る)
             Debug.Log("ゴールチェック");
-            //ボールの位置の初期化
-            this.gameObject.GetComponent<Ball>().Start();
 
             //属性の無い球が入ったら、得点は何もしない
             int ballState = this.gameObject.GetComponent<Ball>().GetBallState();
             if (ballState == 0)
             {
+                Debug.Log("無属性");
                 return;
             }
-
-            //得点の計算
-            int score = 100;    //基本点を入れておく
-            int wallState;
-            for (int i = 0; i < wallList.Count; i++)
-            {//同じ属性の壁を数える
-                wallState = wallList[i].GetWallState();
-                if (wallState == ballState)
-                {
-                    score += 10;    //ボーナスを追加
+            else
+            {//得点の計算
+                int score = 100;    //基本点を入れておく
+                int wallState;
+                for (int i = 0; i < wallList.Count; i++)
+                {//同じ属性の壁を数える
+                    wallState = wallList[i].GetWallState();
+                    if (wallState == ballState)
+                    {
+                        score += 10;    //ボーナスを追加
+                    }
+                    wallList[i].SetWallState(0);    //属性を初期化
                 }
-                wallList[i].SetWallState(0);    //属性を初期化
 
+                //プレイヤ1に得点を渡す
+                Debug.Log(score);
+                player1.SetScore(score);
             }
 
-            //プレイヤ1に得点を渡す
-            player1.SetScore(score);
+            //ボールの初期化
+            ball.ResetPosition();
+            ball.SetBollState(0);
+            ball.StartBall(0.0f);   //２P側のほうへ
         }
 
     }

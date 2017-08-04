@@ -20,7 +20,7 @@ public class Ball : MonoBehaviour
     public int angleCheckValue = 3;
 
     // Use this for initialization
-    public void Start()
+    void Start()
     {
         m_rigidbody.position = Vector3.zero;
         m_rigidbody.velocity = Vector3.zero;
@@ -118,5 +118,23 @@ public class Ball : MonoBehaviour
             float x = m_rigidbody.velocity.x * angleCheckValue;
             m_rigidbody.velocity = new Vector3(x, m_rigidbody.velocity.y, m_rigidbody.velocity.z);
         }
+    }
+
+    //位置リセット
+    public void ResetPosition()
+    {
+        m_rigidbody.position = Vector3.zero;
+        m_rigidbody.velocity = Vector3.zero;
+    }
+
+    //力を与える(動かす)
+    public void StartBall(float angle)
+    {
+        m_rigidbody.AddForce(new Vector3(Random.Range(randomRange1, randomRange2),
+            0.0f,
+            Random.Range(randomRange1, randomRange2)));
+        m_MeshRenderer = GetComponent<MeshRenderer>();
+        m_MeshRenderer.material.color = Color.white;
+        m_State = 0;
     }
 }
