@@ -23,35 +23,43 @@ public class Player2 : MonoBehaviour {
 
 	// Update is called once per frame
 	//ラケット操作//
-	void Update () {
+	void Update()
+	{
 		//ラケット上移動//
 		Vector3 euler = transform.rotation.eulerAngles;
 
-		if (Input.GetKey (KeyCode.UpArrow) && this.transform.position.z < 23) {
-			this.transform.position = new Vector3 (this.transform.position.x, this.transform.position.y, 
+		if (Input.GetKey(KeyCode.UpArrow) && this.transform.position.z < 23)
+		{
+			this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y,
 				this.transform.position.z + Speed);
 
 			//ラケット回転//		
-			this.transform.rotation = Quaternion.Euler (0, -21, 0);
+			this.transform.rotation = Quaternion.Euler(0, -21, 0);
 
 			//ラケット下移動//
-		} else if (Input.GetKey (KeyCode.DownArrow) && this.transform.position.z > -23) {
-			this.transform.position = new Vector3 (this.transform.position.x, this.transform.position.y, 
+		}
+		else if (Input.GetKey(KeyCode.DownArrow) && this.transform.position.z > -23)
+		{
+			this.transform.position = new Vector3(this.transform.position.x, this.transform.position.y,
 				this.transform.position.z - Speed);
 			//ラケット回転//
-			this.transform.rotation = Quaternion.Euler (0, 21, 0);
+			this.transform.rotation = Quaternion.Euler(0, 21, 0);
 		}
 		//ラケット回転リセット//
-		if (Input.GetKeyUp (KeyCode.UpArrow)) {
-				this.transform.rotation = Quaternion.Euler (0, 0, 0);
-			}
-		if (Input.GetKeyUp (KeyCode.DownArrow)) {
-				this.transform.rotation = Quaternion.Euler (0, 0, 0);
-			}
-
+		if (Input.GetKeyUp(KeyCode.UpArrow))
+		{
+			this.transform.rotation = Quaternion.Euler(0, 0, 0);
 		}
-	//スコア//
-	void AddGauge(){
-		gaugecontroller.Score = Set_Score;
+		if (Input.GetKeyUp(KeyCode.DownArrow))
+		{
+			this.transform.rotation = Quaternion.Euler(0, 0, 0);
+		}
+
+	}
+
+	public void SetScore(int Score)
+	{
+		Set_Score += Score;
+		gaugecontroller.SetGaugeValue(Set_Score);
 	}
 }

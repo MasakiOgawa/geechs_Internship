@@ -34,7 +34,7 @@ public class GaugeController : MonoBehaviour
 	}
 
 	// 現在のスコアを設定
-	public void GetGaugeValue(int GaugeValue)
+	public void SetGaugeValue(int GaugeValue)
 	{
 		Score = GaugeValue;
 	}
