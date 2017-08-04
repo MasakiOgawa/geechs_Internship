@@ -7,12 +7,10 @@ public class CollisionManager : MonoBehaviour
 {
     public Wall wall;
     public Ball ball;
-    public bool hitPlayer1;
+    public bool hitPlayer1; //必要ないかも
     public bool hitPlayer2;
     public int hitWall;
 
-    private int ballState;  //ボールの属性を格納
-    private int wallState;  //壁の属性を格納
 
     // Use this for initialization
     void Start()
@@ -20,8 +18,6 @@ public class CollisionManager : MonoBehaviour
         hitPlayer1 = false;
         hitPlayer2 = false;
         hitWall = 0;
-        ballState = 0;
-        wallState = 0;
     }
 
     // Update is called once per frame
@@ -37,18 +33,29 @@ public class CollisionManager : MonoBehaviour
         {//ボールと1Pのラケットが当たった場合
             hitPlayer1 = true;
             hitPlayer2 = false;
-
-            //ボールの属性を変更
+            ball.SetBollState(1);
         }
         else if (col.gameObject.tag == "Racket2")
         {//ボールと2Pのラケットが当たった場合
             hitPlayer1 = false;
             hitPlayer2 = true;
+            ball.SetBollState(2);
         }
         else if (col.gameObject.tag == "Wall")
         {//ボールと壁が当たった場合
-            wallState = wall.GetWallState();
-            ballState = ball.GetBallState();
+
+            wall = col.gameObject.GetComponent<Wall>();
+            ball = this.gameObject.GetComponent<Ball>();
+
+            int ballState = ball.GetBallState();
+            int wallState = wall.GetWallState();
+
+            //{//デバッグテスト
+            //    Debug.Log("デバッグ");
+            //    ball.SpeedUp();
+            //    ball.SetBollState(1);
+            //}
+
             if (ballState == 0)
             {
             }
@@ -63,12 +70,53 @@ public class CollisionManager : MonoBehaviour
                 {
                     wallState = ballState;
                     wall.SetWallState(wallState);
-                    //ball.SpeedDown(); //減速
+                    ball.SpeedDown();
                 }
             }
             else
             {
-                //加速
+                ball.SpeedUp();
+            }
+        }
+    }
+
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.tag == "Wall")
+        {//ボールと壁が当たった場合
+
+            wall = col.gameObject.GetComponent<Wall>();
+            ball = this.gameObject.GetComponent<Ball>();
+
+            int ballState = ball.GetBallState();
+            int wallState = wall.GetWallState();
+
+            //{//デバッグテスト
+            //    Debug.Log("デバッグ");
+            //    ball.SpeedUp();
+            //    ball.SetBollState(1);
+            //}
+
+            if (ballState == 0)
+            {
+            }
+            else if (wallState != ballState)
+            {
+                if (wallState == 0)
+                {
+                    wallState = ballState;  //デバッグ確認用
+                    wall.SetWallState(wallState);
+                }
+                else
+                {
+                    wallState = ballState;
+                    wall.SetWallState(wallState);
+                    ball.SpeedDown();
+                }
+            }
+            else
+            {
+                ball.SpeedUp();
             }
         }
     }
