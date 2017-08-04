@@ -22,7 +22,8 @@ public class Ball : MonoBehaviour
     // Use this for initialization
     public void Start()
     {
-        //m_rigidbody
+        m_rigidbody.position = Vector3.zero;
+        m_rigidbody.velocity = Vector3.zero;
         m_rigidbody.AddForce(new Vector3(Random.Range(randomRange1, randomRange2),
             0.0f,
             Random.Range(randomRange1, randomRange2)));
@@ -37,7 +38,7 @@ public class Ball : MonoBehaviour
         MinSpeed = 0.5f;
 
         SetBollState(0);
-        SetBollState(1);    //デバッグ
+        //SetBollState(1);    //デバッグ
     }
 
     // Update is called once per frame

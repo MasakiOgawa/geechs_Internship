@@ -13,8 +13,9 @@ public class CollisionManager : MonoBehaviour
 
     [SerializeField]
     private List<Wall> wallList;
-    //private Player1 player1;
-    //private Player2 player2;
+    public Player player1;
+    public Player2 player2;
+
 
     // Use this for initialization
     void Start()
@@ -33,49 +34,50 @@ public class CollisionManager : MonoBehaviour
     //当たった場合の処理(物理的な当たり判定)
     void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.tag == "Racket1")
+        if (col.gameObject.tag == "Player1")
         {//ボールと1Pのラケットが当たった場合
             ball.SetBollState(1);
+            Debug.Log("１に当たった");
         }
-        else if (col.gameObject.tag == "Racket2")
+        else if (col.gameObject.tag == "Player2")
         {//ボールと2Pのラケットが当たった場合
             ball.SetBollState(2);
         }
-        else if (col.gameObject.tag == "Wall")
-        {//ボールと壁が当たった場合
-            wall = col.gameObject.GetComponent<Wall>();
-            ball = this.gameObject.GetComponent<Ball>();
-            int ballState = ball.GetBallState();
-            int wallState = wall.GetWallState();
+        //else if (col.gameObject.tag == "Wall")
+        //{//ボールと壁が当たった場合
+        //    wall = col.gameObject.GetComponent<Wall>();
+        //    ball = this.gameObject.GetComponent<Ball>();
+        //    int ballState = ball.GetBallState();
+        //    int wallState = wall.GetWallState();
 
-            if (ballState == 0)
-            {
-            }
-            else if (wallState != ballState)
-            {
-                if (wallState == 0)
-                {
-                    wallState = ballState;  //デバッグ確認用
-                    wall.SetWallState(wallState);
-                    Debug.Log("無色");
-                }
-                else
-                {
-                    wallState = ballState;
-                    wall.SetWallState(wallState);
-                    //ball.SpeedDown();
-                    Debug.Log("違う色");
-                }
-            }
-            else
-            {
-                Debug.Log("同じ色");
-                //ball.SpeedUp();
-            }
+        //    if (ballState == 0)
+        //    {
+        //    }
+        //    else if (wallState != ballState)
+        //    {
+        //        if (wallState == 0)
+        //        {
+        //            wallState = ballState;  //デバッグ確認用
+        //            wall.SetWallState(wallState);
+        //            Debug.Log("無色");
+        //        }
+        //        else
+        //        {
+        //            wallState = ballState;
+        //            wall.SetWallState(wallState);
+        //            //ball.SpeedDown();
+        //            Debug.Log("違う色");
+        //        }
+        //    }
+        //    else
+        //    {
+        //        Debug.Log("同じ色");
+        //        //ball.SpeedUp();
+        //    }
 
-            //反射ベクトルを計算
-            ball.AngleCheck();
-        }
+        //    //反射ベクトルを計算
+        //    ball.AngleCheck();
+        //}
 
     }
 
@@ -120,6 +122,7 @@ public class CollisionManager : MonoBehaviour
         else if (col.gameObject.tag == "GoalArea1")
         {//1P側のゴールエリアに入った場合(2Pに得点が入る)
             //ボールの位置の初期化
+            Debug.Log("ゴールチェック");
             this.gameObject.GetComponent<Ball>().Start();
 
             //属性の無い球が入ったら、得点は何もしない
@@ -129,24 +132,26 @@ public class CollisionManager : MonoBehaviour
                 return;
             }
             
-            ////得点の計算
-            //int score = 100;    //基本点を入れておく
-            //int wallState;
-            //for (int i = 0; i < wallList.Count; i++)
-            //{//同じ属性の壁を数える
-            //    wallState = wallList[i].GetWallState();
-            //    if (wallState == ballState)
-            //    {
-            //        score += 10;    //ボーナスを追加
-            //        wallList[i].SetWallState(0);    //属性を初期化
-            //    }
-            //}
+            //得点の計算
+            int score = 100;    //基本点を入れておく
+            int wallState;
+            for (int i = 0; i < wallList.Count; i++)
+            {//同じ属性の壁を数える
+                wallState = wallList[i].GetWallState();
+                if (wallState == ballState)
+                {
+                    score += 10;    //ボーナスを追加
+                }
+                wallList[i].SetWallState(0);    //属性を初期化
+
+            }
 
             //プレイヤ2に得点を渡す
-            //player2.SetScore(score);
+            player2.SetScore(score);
         }
         else if (col.gameObject.tag == "GoalArea2")
         {//2P側のゴールエリアに入った場合(1Pに得点が入る)
+            Debug.Log("ゴールチェック");
             //ボールの位置の初期化
             this.gameObject.GetComponent<Ball>().Start();
 
@@ -158,20 +163,21 @@ public class CollisionManager : MonoBehaviour
             }
 
             //得点の計算
-            //int score = 100;    //基本点を入れておく
-            //int wallState;
-            //for (int i = 0; i < wallList.Count; i++)
-            //{//同じ属性の壁を数える
-            //    wallState = wallList[i].GetWallState();
-            //    if (wallState == ballState)
-            //    {
-            //        score += 10;    //ボーナスを追加
-            //        wallList[i].SetWallState(0);    //属性を初期化
-            //    }
-            //}
+            int score = 100;    //基本点を入れておく
+            int wallState;
+            for (int i = 0; i < wallList.Count; i++)
+            {//同じ属性の壁を数える
+                wallState = wallList[i].GetWallState();
+                if (wallState == ballState)
+                {
+                    score += 10;    //ボーナスを追加
+                }
+                wallList[i].SetWallState(0);    //属性を初期化
+
+            }
 
             //プレイヤ1に得点を渡す
-            //player1.SetScore(score);
+            player1.SetScore(score);
         }
 
     }
