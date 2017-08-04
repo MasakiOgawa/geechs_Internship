@@ -42,7 +42,10 @@ public class Player : MonoBehaviour {
 		}
 			
 	}
-	void AddGauge(){
-		gaugecontroller.Score = Set_Score;
-	}
+	public void SetScore(int Score){
+		Set_Score = Score;
+
+        gaugecontroller.SetGaugeValue(Set_Score);
+
+    }
 }

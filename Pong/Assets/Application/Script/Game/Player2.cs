@@ -50,8 +50,11 @@ public class Player2 : MonoBehaviour {
 			}
 
 		}
-	//スコア//
-	void AddGauge(){
-		gaugecontroller.Score = Set_Score;
-	}
+    public void SetScore(int Score)
+    {
+        Set_Score = Score;
+
+        gaugecontroller.SetGaugeValue(Set_Score);
+
+    }
 }
