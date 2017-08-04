@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class GaugeController : MonoBehaviour
 {
 	// コンスト 定数
@@ -23,7 +24,7 @@ public class GaugeController : MonoBehaviour
 	private void Update()
 	{
 		// テスト
-		//Gauge.value += 10;
+		Gauge.value += 10;
 
 		// ゲージを徐々に加算
 		if(Gauge.value < Score)
@@ -33,7 +34,7 @@ public class GaugeController : MonoBehaviour
 	}
 
 	// 現在のスコアを設定
-	public void SetGaugeValue(int GaugeValue)
+	public void GetGaugeValue(int GaugeValue)
 	{
 		Score = GaugeValue;
 	}
