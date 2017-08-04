@@ -12,6 +12,8 @@ TagManager:
   - TutorialCollision
   - Player1
   - Player2
+  - GoalArea1
+  - GoalArea2
   layers:
   - Default
   - TransparentFX
