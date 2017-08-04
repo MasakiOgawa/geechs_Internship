@@ -24,7 +24,7 @@ public class GaugeController : MonoBehaviour
 	private void Update()
 	{
 		// テスト
-		Gauge.value += 10;
+		//Gauge.value += 10;
 
 		// ゲージを徐々に加算
 		if(Gauge.value < Score)
