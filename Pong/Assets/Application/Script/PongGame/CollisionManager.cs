@@ -41,6 +41,41 @@ public class CollisionManager : MonoBehaviour
         {//ボールと2Pのラケットが当たった場合
             ball.SetBollState(2);
         }
+        else if (col.gameObject.tag == "Wall")
+        {//ボールと壁が当たった場合
+            wall = col.gameObject.GetComponent<Wall>();
+            ball = this.gameObject.GetComponent<Ball>();
+            int ballState = ball.GetBallState();
+            int wallState = wall.GetWallState();
+
+            if (ballState == 0)
+            {
+            }
+            else if (wallState != ballState)
+            {
+                if (wallState == 0)
+                {
+                    wallState = ballState;  //デバッグ確認用
+                    wall.SetWallState(wallState);
+                    Debug.Log("無色");
+                }
+                else
+                {
+                    wallState = ballState;
+                    wall.SetWallState(wallState);
+                    //ball.SpeedDown();
+                    Debug.Log("違う色");
+                }
+            }
+            else
+            {
+                Debug.Log("同じ色");
+                //ball.SpeedUp();
+            }
+
+            //反射ベクトルを計算
+            ball.AngleCheck();
+        }
 
     }
 
@@ -69,14 +104,14 @@ public class CollisionManager : MonoBehaviour
                 {
                     wallState = ballState;
                     wall.SetWallState(wallState);
-                    ball.SpeedDown();
+                    //ball.SpeedDown();
                     Debug.Log("違う色");
                 }
             }
             else
             {
                     Debug.Log("同じ色");
-                ball.SpeedUp();
+                //ball.SpeedUp();
             }
 
             //反射ベクトルを計算
@@ -93,19 +128,19 @@ public class CollisionManager : MonoBehaviour
             {
                 return;
             }
-
-            //得点の計算
-            int score = 100;    //基本点を入れておく
-            int wallState;
-            for (int i = 0; i < wallList.Count; i++)
-            {//同じ属性の壁を数える
-                wallState = wallList[i].GetWallState();
-                if (wallState == ballState)
-                {
-                    score += 10;    //ボーナスを追加
-                    wallList[i].SetWallState(0);    //属性を初期化
-                }
-            }
+            
+            ////得点の計算
+            //int score = 100;    //基本点を入れておく
+            //int wallState;
+            //for (int i = 0; i < wallList.Count; i++)
+            //{//同じ属性の壁を数える
+            //    wallState = wallList[i].GetWallState();
+            //    if (wallState == ballState)
+            //    {
+            //        score += 10;    //ボーナスを追加
+            //        wallList[i].SetWallState(0);    //属性を初期化
+            //    }
+            //}
 
             //プレイヤ2に得点を渡す
             //player2.SetScore(score);
@@ -123,17 +158,17 @@ public class CollisionManager : MonoBehaviour
             }
 
             //得点の計算
-            int score = 100;    //基本点を入れておく
-            int wallState;
-            for (int i = 0; i < wallList.Count; i++)
-            {//同じ属性の壁を数える
-                wallState = wallList[i].GetWallState();
-                if (wallState == ballState)
-                {
-                    score += 10;    //ボーナスを追加
-                    wallList[i].SetWallState(0);    //属性を初期化
-                }
-            }
+            //int score = 100;    //基本点を入れておく
+            //int wallState;
+            //for (int i = 0; i < wallList.Count; i++)
+            //{//同じ属性の壁を数える
+            //    wallState = wallList[i].GetWallState();
+            //    if (wallState == ballState)
+            //    {
+            //        score += 10;    //ボーナスを追加
+            //        wallList[i].SetWallState(0);    //属性を初期化
+            //    }
+            //}
 
             //プレイヤ1に得点を渡す
             //player1.SetScore(score);
