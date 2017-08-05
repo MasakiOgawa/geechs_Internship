@@ -5,11 +5,10 @@ using UnityEngine;
 
 public class CollisionManager : MonoBehaviour
 {
-    public Wall wall;
-    public Ball ball;
+    private Wall wall;
+    private Ball ball;
 
-    [SerializeField]
-    private List<Wall> wallList;
+    [SerializeField]private List<Wall> wallList;
     public Player player1;
     public Player2 player2;
 
@@ -32,13 +31,16 @@ public class CollisionManager : MonoBehaviour
         if (col.gameObject.tag == "Player1")
         {//ボールと1Pのラケットが当たった場合
             ball.SetBollState(1);
-            Debug.Log("1Pに当たった");
+            //Debug.Log("1Pに当たった");
         }
         else if (col.gameObject.tag == "Player2")
         {//ボールと2Pのラケットが当たった場合
             ball.SetBollState(2);
-            Debug.Log("2Pに当たった");
+            //Debug.Log("2Pに当たった");
         }
+
+        ball.CheckAngle();
+        ball.CheckSpeed();
     }
 
     //当たった場合の処理(物理的な当たりではない)
@@ -54,29 +56,29 @@ public class CollisionManager : MonoBehaviour
             if (ballState == 0)
             {
             }
-            else if (wallState != ballState)
+            else if (wallState == ballState)
             {
-                wallState = ballState;  //デバッグ確認用
-                wall.SetWallState(wallState);
-                if (wallState != 0)
-                {
-                    ball.SpeedDown();
-                    Debug.Log("違う色");
-                }
-                else
-                {
-                    Debug.Log("無色");
-                }
+                //Debug.Log("同じ色");
+                ball.SpeedUp();
             }
             else
             {
-                Debug.Log("同じ色");
-                ball.SpeedUp();
+                if (wallState == 0)
+                {
+                    //Debug.Log("無色");
+                }
+                else
+                {
+                    ball.SpeedDown();
+                    //Debug.Log("違う色");
+                }
+                wallState = ballState;  //デバッグ確認用
+                wall.SetWallState(wallState);
             }
 
             //反射時の調整
-            ball.CheckAngle();
-            ball.CheckSpeed();
+            //ball.CheckSpeed();
+            //ball.CheckAngle();
         }
         else if (col.gameObject.tag == "GoalArea1")
         {//1P側のゴールエリアに入った場合(2Pに得点が入る)
@@ -97,7 +99,7 @@ public class CollisionManager : MonoBehaviour
             //ボールの初期化
             ball.ResetPosition();
             ball.SetBollState(0);
-            ball.StartBall(0.0f);   //2P側のほうへ
+            ball.StartBall(2);   //2P側のほうへ
         }
         else if (col.gameObject.tag == "GoalArea2")
         {//2P側のゴールエリアに入った場合(1Pに得点が入る)
@@ -118,7 +120,7 @@ public class CollisionManager : MonoBehaviour
             //ボールの初期化
             ball.ResetPosition();
             ball.SetBollState(0);
-            ball.StartBall(0.0f);   //1P側のほうへ
+            ball.StartBall(1);   //1P側のほうへ
         }
 
     }

@@ -4140,6 +4140,16 @@ Prefab:
       propertyPath: player2
       value: 
       objectReference: {fileID: 1458996693}
+    - target: {fileID: 114296674551110136, guid: 579240eddaabf9f4888f7c2a28346488,
+        type: 2}
+      propertyPath: angleCheckValueX
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114296674551110136, guid: 579240eddaabf9f4888f7c2a28346488,
+        type: 2}
+      propertyPath: angleCheckValueZ
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 579240eddaabf9f4888f7c2a28346488, type: 2}
   m_IsPrefabParent: 0

@@ -111,11 +111,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_rigidbody: {fileID: 54005673541847428}
-  angleCheckValue: 3
-  SpeedUpValue: 0
-  SpeedDownValue: 0
-  MaxSpeed: 0
-  MinSpeed: 0
 --- !u!114 &114489202977184290
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -127,8 +122,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 677c829503b64064d857c9e80642430d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wall: {fileID: 0}
-  ball: {fileID: 114296674551110136}
   wallList:
   - {fileID: 0}
   - {fileID: 0}
