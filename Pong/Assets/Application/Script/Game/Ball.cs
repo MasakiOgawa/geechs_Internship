@@ -27,9 +27,12 @@ public class Ball : MonoBehaviour
     {
         m_rigidbody.position = Vector3.zero;
         m_rigidbody.velocity = Vector3.zero;
-        m_rigidbody.AddForce(new Vector3(Random.Range(randomRange1, randomRange2),
-            0.0f,
-            Random.Range(randomRange1, randomRange2)));
+
+		// 321スタートの後にボールをスタートさせるためコメント
+        //m_rigidbody.AddForce(new Vector3(Random.Range(randomRange1, randomRange2),
+        //    0.0f,
+        //    Random.Range(randomRange1, randomRange2)));
+
         m_MeshRenderer = GetComponent<MeshRenderer>();
         m_MeshRenderer.material.color = Color.white;
         m_State = 0;

@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 65347238940394328}
   m_Layer: 0
   m_Name: GoalArea2
-  m_TagString: GoalArea2
+  m_TagString: GoalArea1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33,7 +33,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1740646501019318}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -51,4 +51,4 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 50, y: 20, z: 100}
-  m_Center: {x: -115, y: 0, z: 0}
+  m_Center: {x: -105, y: 0, z: 0}

@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 65722821879806414}
   m_Layer: 0
   m_Name: GoalArea1
-  m_TagString: GoalArea1
+  m_TagString: GoalArea2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51,4 +51,4 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 50, y: 20, z: 100}
-  m_Center: {x: 115, y: 0, z: 0}
+  m_Center: {x: 105, y: 0, z: 0}
