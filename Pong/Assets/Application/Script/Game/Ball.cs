@@ -153,7 +153,9 @@ public class Ball : MonoBehaviour
                 x *= -1.0f;
                 break;
             case 2:
-                break;
+				//右側にする
+				x *= 1.0f;
+				break;
             default:
                 {//適当にランダムに左右を逆にしたい
                     if (Random.Range(0.0f, 1.0f) < 0.5f)

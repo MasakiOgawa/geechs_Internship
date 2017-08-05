@@ -8,7 +8,7 @@ public class Player2 : MonoBehaviour
 	private const float PLAYER_MOVE_MAX = 27.0f;        // プレイヤーの移動最大値
 	private const int MOVE_COUNT_MAX = 5;				// 移動カウンタ最大値
 	private const float PLAYER_ANGLE = 22.0f;           // プレイヤーの角度
-	private const float BALL_SPEED_UP = 1.5f;           // ボール加速量
+	private const float BALL_SPEED_UP = 1.3f;           // ボール加速量
 
 	//public class//
 	public ResultController resultcontroller;
@@ -24,7 +24,7 @@ public class Player2 : MonoBehaviour
 	void Start()
 	{
 		Set_Score = 0;
-		Speed = 1f;
+		Speed = 1.5f;
 		Rote = 15;
 		MoveCount = 0;
 	}
@@ -109,7 +109,7 @@ public class Player2 : MonoBehaviour
 	private void OnCollisionEnter(Collision collision)
 	{
 		// 衝突対象がボール
-		if (collision.gameObject.tag == "Ball")
+		if (collision.gameObject.tag == "Ball" & Input.GetAxisRaw("Vertical2") != 0)
 		{
 			// プレイヤーが動かずはじいたらボールの勢いを加算
 			if (MoveCount < MOVE_COUNT_MAX)
