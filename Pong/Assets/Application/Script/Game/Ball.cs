@@ -9,15 +9,18 @@ public class Ball : MonoBehaviour
     private const float randomRange1 = 1000.0f;
     private const float randomRange2 = 3000.0f;
 
+    public int angleCheckValue = 5; //角度調整に使ういい感じの数値
+
     public float SpeedUpValue;      //速度上昇値
     public float SpeedDownValue;    //速度下降値
-    public float MaxSpeed;    //速度最大値
-    public float MinSpeed;    //速度最小値
+    public float MaxSpeed;          //速度最大値
+    public float MinSpeed;          //速度最小値
 
     private int m_State;    //0：無属性 //1：プレイヤ１ //2：プレイヤ２
-    private MeshRenderer m_MeshRenderer;
 
-    public int angleCheckValue = 3;
+
+    private MeshRenderer m_MeshRenderer;    //色の変更に使用
+
 
     // Use this for initialization
     void Start()
@@ -31,11 +34,11 @@ public class Ball : MonoBehaviour
         m_MeshRenderer.material.color = Color.white;
         m_State = 0;
 
-        SpeedUpValue = 1.1f;
+        SpeedUpValue = 1.2f;
         SpeedDownValue = 0.9f;
 
-        MaxSpeed = 2.0f;
-        MinSpeed = 0.5f;
+        MaxSpeed = 100.0f;
+        MinSpeed = 50.0f;
 
         SetBollState(0);
         //SetBollState(1);    //デバッグ
@@ -44,7 +47,8 @@ public class Ball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //座標の更新
+        CheckSpeed();   //毎フレーム速度を監視する
+        //CheckAngle();
     }
 
     //ボールの属性を設定
@@ -75,38 +79,22 @@ public class Ball : MonoBehaviour
         return m_State;
     }
 
-    //{//SetBallStateに移植
-    //ボールの色を変える
-    //public void SetColor(int color)
-    //{}
-    //}
-
     //加速
     public void SpeedUp()
     {
         m_rigidbody.velocity *= SpeedUpValue;
-        if (m_rigidbody.velocity.magnitude > MaxSpeed)
-        {
-            m_rigidbody.velocity.Normalize();
-            m_rigidbody.velocity *= MaxSpeed;
-            //m_rigidbody.velocity = Vector3.ClampMagnitude(m_rigidbody.velocity, MaxSpeed);
-        }
-
+        Debug.Log("[Ball.cs]SpeedUp()" + m_rigidbody.velocity.magnitude);
     }
 
     //減速
     public void SpeedDown()
     {
         m_rigidbody.velocity *= SpeedDownValue;
-        if (m_rigidbody.velocity.magnitude < MinSpeed)
-        {
-            m_rigidbody.velocity.Normalize();
-            m_rigidbody.velocity *= MinSpeed;
-        }
+        Debug.Log("[Ball.cs]SpeedDown()" + m_rigidbody.velocity.magnitude);
     }
 
     //角度調整
-    public void AngleCheck()
+    public void CheckAngle()
     {
         if (Mathf.Abs(m_rigidbody.velocity.z) < angleCheckValue)
         {
@@ -118,6 +106,22 @@ public class Ball : MonoBehaviour
             float x = m_rigidbody.velocity.x * angleCheckValue;
             m_rigidbody.velocity = new Vector3(x, m_rigidbody.velocity.y, m_rigidbody.velocity.z);
         }
+        Debug.Log("[Ball.cs]AngelCheck()" + m_rigidbody.velocity.magnitude);
+    }
+
+    //速度調整
+    public void CheckSpeed()
+    {
+        if (m_rigidbody.velocity.magnitude > MaxSpeed)
+        {
+            m_rigidbody.velocity = m_rigidbody.velocity.normalized * MaxSpeed;
+            Debug.Log("[Ball.cs]最大値検知");
+        }
+        if (m_rigidbody.velocity.magnitude < MinSpeed)
+        {
+            m_rigidbody.velocity = m_rigidbody.velocity.normalized * MinSpeed;
+            Debug.Log("[Ball.cs]最小値検知");
+        }
     }
 
     //位置リセット
@@ -128,13 +132,14 @@ public class Ball : MonoBehaviour
     }
 
     //力を与える(動かす)
+    //引数 angle：角度(飛ばしたい向き)
+    //ゴールして位置のリセットをした後に呼び出す。
+    //また、球が横方向に進まなくなったときなどにも使う。
     public void StartBall(float angle)
     {
+        //！まだランダムです！
         m_rigidbody.AddForce(new Vector3(Random.Range(randomRange1, randomRange2),
             0.0f,
             Random.Range(randomRange1, randomRange2)));
-        m_MeshRenderer = GetComponent<MeshRenderer>();
-        m_MeshRenderer.material.color = Color.white;
-        m_State = 0;
     }
 }
