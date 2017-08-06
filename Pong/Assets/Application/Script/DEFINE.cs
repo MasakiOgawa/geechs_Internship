@@ -11,4 +11,6 @@ public static class DEFINE {
     public const string PREFAB_PATH_BALL 	= "Prefabs/PongGame/ball";
 	public const string PREFAB_PATH_HISTORY_PANEL = "Prefabs/PongGame/HistoryPanel";
 
+	public const int GoalScore = 100;       // ゴールした時のスコア
+	public const int WallScore = 10;        // ゴールした時の壁追加スコア
 }

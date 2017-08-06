@@ -11,7 +11,7 @@ public class GaugeController : MonoBehaviour
 
 	// メンバ 変数
 	private Slider Gauge;       // ゲージの情報を取得
-	public int Score;			// 現在のスコア
+	private int Score;			// 現在のスコア
 
 	// Use this for initialization
 	private void Start()

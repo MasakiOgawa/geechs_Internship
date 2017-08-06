@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
 	public int Rote;
 
 	//private class//
-	private int Set_Score;
+	private static int Set_Score;
 	private int MoveCount;		// プレイヤーが動き出す時間計測用
 
 	// Use this for initialization
@@ -120,5 +120,14 @@ public class Player : MonoBehaviour
 			}
 		}
 		
+	}
+
+	//=============================================================================
+	// スコア取得関数
+	//=============================================================================
+	public static int GetScore()
+	{
+		// スコアの値を返す
+		return Set_Score;
 	}
 }
