@@ -83,12 +83,12 @@ public class CollisionManager : MonoBehaviour
         else if (col.gameObject.tag == "GoalArea1")
         {//1P側のゴールエリアに入った場合(2Pに得点が入る)
             //得点の計算
-            int score = DEFINE.GoalScore;    //基本点を入れておく
+            int score = DEFINE.GOAL_SCORE;    //基本点を入れておく
             for (int i = 0; i < wallList.Count; i++)
             {//同じ属性の壁を数える
                 if (2 == wallList[i].GetWallState())
                 {
-                    score += DEFINE.WallScore;    //ボーナス加算
+                    score += DEFINE.WALL_SCORE;    //ボーナス加算
                 }
                 wallList[i].SetWallState(0);    //属性のリセット
             }
@@ -99,17 +99,17 @@ public class CollisionManager : MonoBehaviour
             //ボールの初期化
             ball.ResetPosition();
             ball.SetBollState(0);
-            ball.StartBall(2);   //2P側のほうへ
+			ball.StartBall(1);   //1P側のほうへ
         }
         else if (col.gameObject.tag == "GoalArea2")
         {//2P側のゴールエリアに入った場合(1Pに得点が入る)
             //得点の計算
-            int score = DEFINE.GoalScore; ;
+            int score = DEFINE.GOAL_SCORE; ;
             for (int i = 0; i < wallList.Count; i++)
             {//同じ属性の壁を数える
                 if (1 == wallList[i].GetWallState())
                 {
-                    score += DEFINE.WallScore;
+                    score += DEFINE.WALL_SCORE;
                 }
                 wallList[i].SetWallState(0);
             }
@@ -120,8 +120,8 @@ public class CollisionManager : MonoBehaviour
             //ボールの初期化
             ball.ResetPosition();
             ball.SetBollState(0);
-            ball.StartBall(1);   //1P側のほうへ
-        }
+			ball.StartBall(2);   //2P側のほうへ
+		}
 
     }
 }

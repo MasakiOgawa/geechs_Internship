@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
+	private const int BALL_START_INTERVAL = 60;      // ボールのスタートインターバル
 
-    public Rigidbody m_rigidbody;   //速度を与える対象のRigidBody
+	public Rigidbody m_rigidbody;   //速度を与える対象のRigidBody
     //public const float randomRange1 = 1000.0f;   //未使用 現在のランダムがいい感じなら消す
     //public const float randomRange2 = 3000.0f;
 
@@ -17,9 +18,14 @@ public class Ball : MonoBehaviour
     private float MaxSpeed = 150.0f;         //速度最大値
     private float MinSpeed = 50.0f;          //速度最小値
 
-    private int m_State;    //0：無属性 //1：プレイヤ１ //2：プレイヤ２
+    private int m_State;			//0：無属性 //1：プレイヤ１ //2：プレイヤ２
+	private int StartInterval;      // スタートするまでのインターバル
+	private int StartDirect;		// スタートの向き
 
-    private MeshRenderer m_MeshRenderer;    //色の変更に使用
+	private bool StartBallFlag;     // ボールスタートフラグ
+	private bool GameSetFlag;		// ゲーム終了フラグ
+
+	private MeshRenderer m_MeshRenderer;    //色の変更に使用
 
 
     // Use this for initialization
@@ -43,8 +49,34 @@ public class Ball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //CheckSpeed();   //毎フレーム速度を監視する
-        //CheckAngle();
+		//CheckSpeed();   //毎フレーム速度を監視する
+		//CheckAngle();
+
+		// ゲーム終了フラグがオフなら
+		if (GameSetFlag == false)
+		{
+			// スタートフラグがオンなら
+			if (StartBallFlag == true)
+			{
+				// インターバルを取る
+				if (StartInterval >= BALL_START_INTERVAL)
+				{
+					// ボールスタート
+					StartBall();
+
+					// スタートフラグオフ
+					StartBallFlag = false;
+
+					// インターバル初期化
+					StartInterval = 0;
+				}
+				else if (StartInterval < BALL_START_INTERVAL)
+				{
+					// インターバル加算
+					StartInterval++;
+				}
+			}
+		}
     }
 
     //ボールの属性を設定
@@ -134,46 +166,70 @@ public class Ball : MonoBehaviour
             //Debug.Log("[Ball.cs]位置初期化");
     }
 
-    //力を与える(動かす)
-    //引数 direct：飛ばしたい向き (1...左(1P)側 2...右(2P)側 0...ランダム)
-    //ゴールして位置のリセットをした後に呼び出す。
-    public void StartBall(int direct)
+	// ボールスタート 他クラス呼び出し用
+	// オーバーロード
+	public void StartBall(int direct)
     {
-        float randomMin = Mathf.PI * 0.25f;   //だいたい45°～70°くらいの角度にする
-        float randomMax = Mathf.PI * 0.4f;
-        float radian = Random.Range(randomMin, randomMax);
-        float x = Mathf.Cos(radian);
-        float z = Mathf.Sin(radian);
-        
-        //向きの調整
-        switch (direct)
-        {
-            case 1:
-                //左側にする
-                x *= -1.0f;
-                break;
-            case 2:
+		// 向きを保存
+		StartDirect = direct;
+
+		// スタートフラグオン
+		StartBallFlag = true;
+	}
+
+	//力を与える(動かす)
+	//引数 direct：飛ばしたい向き (1...左(1P)側 2...右(2P)側 0...ランダム)
+	//ゴールして位置のリセットをした後に呼び出す。
+	private void StartBall()
+	{
+		float randomMin = Mathf.PI * 0.25f;   //だいたい45°～70°くらいの角度にする
+		float randomMax = Mathf.PI * 0.4f;
+		float radian = Random.Range(randomMin, randomMax);
+		float x = Mathf.Cos(radian);
+		float z = Mathf.Sin(radian);
+
+		//向きの調整
+		switch (StartDirect)
+		{
+			case 1:
+				//左側にする
+				x *= -1.0f;
+				break;
+			case 2:
 				//右側にする
 				x *= 1.0f;
 				break;
-            default:
-                {//適当にランダムに左右を逆にしたい
-                    if (Random.Range(0.0f, 1.0f) < 0.5f)
-                    {
-                        x *= -1.0f;
-                    }
-                }
-                break;
-        }
+			default:
+				{//適当にランダムに左右を逆にしたい
+					if (Random.Range(0.0f, 1.0f) < 0.5f)
+					{
+						x *= -1.0f;
+					}
+				}
+				break;
+		}
 
-        {//適当にランダムに上下を逆にしたい
-            if (Random.Range(0.0f, 1.0f) < 0.5f)
-            {
-                z *= -1.0f;
-            }
-        }
+		{//適当にランダムに上下を逆にしたい
+			if (Random.Range(0.0f, 1.0f) < 0.5f)
+			{
+				z *= -1.0f;
+			}
+		}
 
-        m_rigidbody.velocity = (new Vector3(x, 0.0f, z));
-        CheckSpeed();   //速度を最低値に合わせる
-    }
+		m_rigidbody.velocity = (new Vector3(x, 0.0f, z));
+		CheckSpeed();   //速度を最低値に合わせる
+	}
+
+
+	// ゲーム終了時処理
+	public void GameEndBall()
+	{
+		//ボール初期化
+		m_rigidbody.position = Vector3.zero;
+		m_rigidbody.velocity = Vector3.zero;
+		SetBollState(0);
+
+		// ゲーム終了
+		GameSetFlag = true;
+	}
 }

@@ -26,14 +26,14 @@ public class Gauge_Add : MonoBehaviour
 		if(PlayerNum == 1)
 		{
 			// 現在のスコアにゴールした時のスコアを加算して代入
-			Gauge.value = Player.GetScore() + DEFINE.GoalScore;
+			Gauge.value = Player.GetScore() + DEFINE.GOAL_SCORE;
 
 			for (int i = 0; i < wallList.Count; i++)
 			{
 				//プレイヤー1の壁を数える
 				if (1 == wallList[i].GetWallState())
 				{
-					Gauge.value += DEFINE.WallScore;    //ボーナス加算
+					Gauge.value += DEFINE.WALL_SCORE;    //ボーナス加算
 				}
 			}
 		}
@@ -42,14 +42,14 @@ public class Gauge_Add : MonoBehaviour
 		if (PlayerNum == 2)
 		{
 			// 現在のスコアにゴールした時のスコアを加算して代入
-			Gauge.value = Player2.GetScore() + DEFINE.GoalScore;
+			Gauge.value = Player2.GetScore() + DEFINE.GOAL_SCORE;
 
 			for (int i = 0; i < wallList.Count; i++)
 			{
 				//プレイヤー2の壁を数える
 				if (2 == wallList[i].GetWallState())
 				{
-					Gauge.value += DEFINE.WallScore;    //ボーナス加算
+					Gauge.value += DEFINE.WALL_SCORE;    //ボーナス加算
 				}
 			}
 		}

@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-	// コンスト定数
-	private const float PLAYER_MOVE_MAX = 27.0f;        // プレイヤーの移動最大値
-	private const int MOVE_COUNT_MAX = 5;               // 移動カウンタ最大値
-	private const float PLAYER_ANGLE = 22.0f;           // プレイヤーの角度
-	private const float BALL_SPEED_UP = 1.7f;			// ボール加速量
-
 	//public class//
 	public ResultController resultcontroller;
 	public GaugeController gaugecontroller;
@@ -18,7 +12,9 @@ public class Player : MonoBehaviour
 
 	//private class//
 	private static int Set_Score;
-	private int MoveCount;		// プレイヤーが動き出す時間計測用
+	private int MoveCount;			// プレイヤーが動き出す時間計測用
+	private bool GameSetFlag;		// ゲーム終了フラグ
+	private int GameSetCount;       // ゲーム終了してからフェードまでをカウント
 
 	// Use this for initialization
 	void Start()
@@ -36,21 +32,21 @@ public class Player : MonoBehaviour
 		if (Input.GetAxisRaw("Vertical1") > 0)
 		{
 			// 角度変更
-			transform.rotation = Quaternion.Euler(0, PLAYER_ANGLE, 0);
+			transform.rotation = Quaternion.Euler(0, DEFINE.PLAYER_ANGLE, 0);
 
 			// 一定以上長押しされたら移動
-			if (MoveCount >= MOVE_COUNT_MAX)
+			if (MoveCount >= DEFINE.MOVE_COUNT_MAX)
 			{
 				transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + Speed);
 
 				// 上限
-				if (transform.position.z > PLAYER_MOVE_MAX)
+				if (transform.position.z > DEFINE.PLAYER_MOVE_MAX)
 				{
-					transform.position = new Vector3(transform.position.x, transform.position.y, PLAYER_MOVE_MAX);
+					transform.position = new Vector3(transform.position.x, transform.position.y, DEFINE.PLAYER_MOVE_MAX);
 				}
 			}
 			// カウンタが最大値未満なら加算
-			else if(MoveCount < MOVE_COUNT_MAX)
+			else if (MoveCount < DEFINE.MOVE_COUNT_MAX)
 			{
 				// カウンタ加算
 				MoveCount++;
@@ -61,21 +57,21 @@ public class Player : MonoBehaviour
 		if (Input.GetAxisRaw("Vertical1") < 0)
 		{
 			// 角度変更
-			transform.rotation = Quaternion.Euler(0, -PLAYER_ANGLE, 0);
+			transform.rotation = Quaternion.Euler(0, -DEFINE.PLAYER_ANGLE, 0);
 
 			// 一定以上長押しされたら移動
-			if (MoveCount >= MOVE_COUNT_MAX)
+			if (MoveCount >= DEFINE.MOVE_COUNT_MAX)
 			{
 				transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - Speed);
-				
+
 				// 下限
-				if (transform.position.z < -PLAYER_MOVE_MAX)
+				if (transform.position.z < -DEFINE.PLAYER_MOVE_MAX)
 				{
-					transform.position = new Vector3(transform.position.x, transform.position.y, -PLAYER_MOVE_MAX);
+					transform.position = new Vector3(transform.position.x, transform.position.y, -DEFINE.PLAYER_MOVE_MAX);
 				}
 			}
 			// カウンタが最大値未満なら加算
-			else if (MoveCount < MOVE_COUNT_MAX)
+			else if (MoveCount < DEFINE.MOVE_COUNT_MAX)
 			{
 				// カウンタ加算
 				MoveCount++;
@@ -88,8 +84,39 @@ public class Player : MonoBehaviour
 			transform.rotation = Quaternion.Euler(0, 0, 0);
 			MoveCount = 0;
 		}
-	}
 
+		if (GameSetFlag == false)
+		{
+			// スコアが最大に達したら
+			if (Set_Score >= DEFINE.MAX_SCORE)
+			{
+				// ボール終了
+				GameObject.FindGameObjectWithTag("Ball").GetComponent<Ball>().GameEndBall();
+
+				// プレハブを取得
+				GameObject prefab = (GameObject)Resources.Load ("Prefabs/PongGame/GameSet");
+
+				// プレハブからインスタンスを生成
+				Instantiate(prefab);
+
+				// フラグオン
+				GameSetFlag = true;
+			}
+		}
+		// ゲーム終了していたら
+		else if (GameSetFlag == true)
+		{
+			if (GameSetCount >= DEFINE.GAME_SET_COUNT)
+			{
+				Mgrs.sceneMgr.LoadScene(DEFINE.SCENE_RESULT);
+			}
+			else if (GameSetCount < DEFINE.GAME_SET_COUNT)
+			{
+				// カウンタ加算
+				GameSetCount++;
+			}
+		}
+	}
 
 	//=============================================================================
 	// スコア設定関数
@@ -109,17 +136,16 @@ public class Player : MonoBehaviour
 	private void OnCollisionEnter(Collision collision)
 	{
 		// 衝突対象がボール
-		if(collision.gameObject.tag == "Ball")
+		if (collision.gameObject.tag == "Ball")
 		{
 			// プレイヤーが動かずはじいたらボールの勢いを加算
-			if(MoveCount < MOVE_COUNT_MAX & Input.GetAxisRaw("Vertical1") != 0 )
+			if (MoveCount < DEFINE.MOVE_COUNT_MAX & Input.GetAxisRaw("Vertical1") != 0)
 			{
 				Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
 
-				rb.velocity *= BALL_SPEED_UP;
+				rb.velocity *= DEFINE.BALL_SPEED_UP;
 			}
 		}
-		
 	}
 
 	//=============================================================================
