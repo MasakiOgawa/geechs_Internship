@@ -27,7 +27,7 @@ public class CountDwon : MonoBehaviour
 			// アニメが再生しているかどうか
 			if (CountDownAnim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
 			{
-				Debug.Log("アニメ停止");
+				//Debug.Log("アニメ停止");
 
 				// ゲームスタートフラグ オン
 				GameStart = true;
