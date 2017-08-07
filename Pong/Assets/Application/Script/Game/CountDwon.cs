@@ -8,7 +8,8 @@ public class CountDwon : MonoBehaviour
 	private bool GameStart;             // ゲームスタートフラグ
 
 	[SerializeField]
-	private Ball ball;					// ボール情報
+	private Ball ball;                  // ボール情報
+	private AudioSource SE_00;
 
 	// Use this for initialization
 	void Start()
@@ -17,6 +18,9 @@ public class CountDwon : MonoBehaviour
 		CountDownAnim = GetComponent<Animator>();
 
 		GameStart = false;              // ゲームスタートフラグ
+		SE_00 = GetComponent<AudioSource>();
+
+		SE_00.PlayOneShot(SE_00.clip);
 	}
 
 	// Update is called once per frame

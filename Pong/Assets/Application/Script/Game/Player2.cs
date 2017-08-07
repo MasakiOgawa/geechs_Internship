@@ -14,7 +14,10 @@ public class Player2 : MonoBehaviour
 	private static int Set_Score;
 	private int MoveCount;			// プレイヤーが動き出す時間計測用
 	private bool GameSetFlag;		// ゲーム終了フラグ
-	private int GameSetCount;		// ゲーム終了してからフェードまでをカウント
+	private int GameSetCount;       // ゲーム終了してからフェードまでをカウント
+
+	private AudioSource SE_00;
+	private AudioSource SE_01;
 
 	// Use this for initialization
 	void Start()
@@ -23,6 +26,10 @@ public class Player2 : MonoBehaviour
 		Speed = 1.5f;
 		Rote = 15;
 		MoveCount = 0;
+
+		AudioSource[] audio = GetComponents<AudioSource>();
+		SE_00 = audio[0];
+		SE_01 = audio[1];
 	}
 
 	// Update is called once per frame
@@ -101,6 +108,8 @@ public class Player2 : MonoBehaviour
 
 				// フラグオン
 				GameSetFlag = true;
+
+				SE_01.PlayOneShot(SE_01.clip);
 			}
 		}
 		// ゲーム終了していたら
@@ -144,6 +153,8 @@ public class Player2 : MonoBehaviour
 				Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
 
 				rb.velocity *= DEFINE.BALL_SPEED_UP;
+
+				SE_00.PlayOneShot(SE_00.clip);
 			}
 		}
 	}
