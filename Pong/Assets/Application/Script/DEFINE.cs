@@ -12,7 +12,7 @@ public static class DEFINE {
 	public const string PREFAB_PATH_HISTORY_PANEL = "Prefabs/PongGame/HistoryPanel";
 
 	public const int GOAL_SCORE = 100;				// ゴールした時のスコア
-	public const int WALL_SCORE = 10;				// ゴールした時の壁追加スコア
+	public const int WALL_SCORE = 20;				// ゴールした時の壁追加スコア
 	public const int MAX_SCORE = 1000;               // スコアの最大値
 
 	public const float PLAYER_MOVE_MAX = 27.0f;        // プレイヤーの移動最大値

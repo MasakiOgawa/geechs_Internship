@@ -21,11 +21,19 @@ public class CollisionManager : MonoBehaviour
 	public Player player1;
     public Player2 player2;
 
-    // Use this for initialization
-    void Start()
+	private AudioSource SE_00;		// 効果音 拍手
+	private AudioSource SE_01;      // 効果音 笛
+	private AudioSource SE_02;      // 効果音 壁
+
+	// Use this for initialization
+	void Start()
     {
         ball = this.gameObject.GetComponent<Ball>();
-    }
+		AudioSource[] audioSources = GetComponents<AudioSource>();
+		SE_00 = audioSources[0];
+		SE_01 = audioSources[1];
+		SE_02 = audioSources[2];
+	}
 
     // Update is called once per frame
     void Update()
@@ -77,7 +85,10 @@ public class CollisionManager : MonoBehaviour
 
         ball.CheckAngle();
         ball.CheckSpeed();
-    }
+
+		// 効果音再生
+		SE_02.PlayOneShot(SE_02.clip);
+	}
 
     //当たった場合の処理(物理的な当たりではない)
     void OnTriggerEnter(Collider col)
@@ -128,6 +139,9 @@ public class CollisionManager : MonoBehaviour
 				// エフェクト
 				Instantiate(WallEffect2, ball.transform.position, Quaternion.Euler(0, 0, 0), NullEffect.transform);
 			}
+
+			// 効果音再生
+			SE_02.PlayOneShot(SE_02.clip);
 		}
 		else if (col.gameObject.tag == "GoalArea1")
 		{//1P側のゴールエリアに入った場合(2Pに得点が入る)
@@ -152,6 +166,10 @@ public class CollisionManager : MonoBehaviour
 			ball.ResetPosition();
 			ball.SetBollState(0);
 			ball.StartBall(1);   //1P側のほうへ
+
+			// 効果音再生
+			SE_00.PlayOneShot(SE_00.clip);
+			SE_01.PlayOneShot(SE_01.clip);
 		}
 		else if (col.gameObject.tag == "GoalArea2")
 		{//2P側のゴールエリアに入った場合(1Pに得点が入る)
@@ -176,6 +194,10 @@ public class CollisionManager : MonoBehaviour
 			ball.ResetPosition();
 			ball.SetBollState(0);
 			ball.StartBall(2);   //2P側のほうへ
+
+			// 効果音再生
+			SE_00.PlayOneShot(SE_00.clip);
+			SE_01.PlayOneShot(SE_01.clip);
 		}
     }
 

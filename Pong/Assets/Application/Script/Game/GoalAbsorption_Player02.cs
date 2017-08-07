@@ -18,8 +18,8 @@ public class GoalAbsorption_Player02 : MonoBehaviour
     {
         particle = this.GetComponent<ParticleSystem>();
         m_FinishPos.x = 40.0f;
-        m_FinishPos.y = 2.0f;
-        m_FinishPos.z = 50.0f;
+        m_FinishPos.y = 20.0f;
+        m_FinishPos.z = 47.0f;
 		m_StartFlag = false;
 	}
 
