@@ -27,9 +27,8 @@ public class Ball : MonoBehaviour
 
 	private MeshRenderer m_MeshRenderer;    //色の変更に使用
 
-
-    // Use this for initialization
-    void Start()
+	// Use this for initialization
+	void Start()
     {
         //レンダラ取得
         m_MeshRenderer = GetComponent<MeshRenderer>();
