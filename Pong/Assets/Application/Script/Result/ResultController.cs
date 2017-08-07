@@ -7,12 +7,7 @@ public class ResultController : MonoBehaviour{
     /// </summary>
     private void Update()
     {
-		if (Input.GetKey("escape"))
-		{
-			Application.Quit();
-		}
-
-		if (Input.anyKey /*| Input.GetButtonDown("Fire1")*/)
+        if (Input.GetKey(KeyCode.Return))
         {
             Mgrs.sceneMgr.LoadScene(DEFINE.SCENE_TITLE);
         }
