@@ -9,7 +9,7 @@ public class TitleController : MonoBehaviour {
 	/// </summary>
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Return))
+        if (Input.anyKey)
         {
             Mgrs.sceneMgr.LoadScene(DEFINE.SCENE_PONG_GAME);
         }
