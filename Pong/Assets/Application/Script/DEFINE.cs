@@ -13,7 +13,7 @@ public static class DEFINE {
 
 	public const int GOAL_SCORE = 100;				// ゴールした時のスコア
 	public const int WALL_SCORE = 10;				// ゴールした時の壁追加スコア
-	public const int MAX_SCORE = 100;               // スコアの最大値
+	public const int MAX_SCORE = 1000;               // スコアの最大値
 
 	public const float PLAYER_MOVE_MAX = 27.0f;        // プレイヤーの移動最大値
 	public const float PLAYER_ANGLE = 22.0f;           // プレイヤーの角度
