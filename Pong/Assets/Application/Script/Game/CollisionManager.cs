@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class CollisionManager : MonoBehaviour
 {
+
+    [SerializeField]private bool DEBUG = true; //デバッグ用
+
     private Wall wall;
     private Ball ball;
 
@@ -27,7 +30,33 @@ public class CollisionManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (DEBUG)
+        {
+            //{//デバッグ用
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.A))
+            {
+                SetStateWallAll(1);
+            }
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.B))
+            {
+                SetStateWallAll(2);
+            }
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.C))
+            {
+                SetStateWallAll(0);
+            }
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.L))
+            {
+                player1.transform.position = new Vector3(player1.transform.position.x, player1.transform.position.y, ball.transform.position.z);
+            }
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.R))
+            {
+                player2.transform.position = new Vector3(player2.transform.position.x, player2.transform.position.y, ball.transform.position.z);
+            }
+            //player1.transform.position = new Vector3(player1.transform.position.x, player1.transform.position.y, ball.transform.position.z);
+            //player2.transform.position = new Vector3(player2.transform.position.x, player2.transform.position.y, ball.transform.position.z);
+            //} //デバッグここまで
+        }
     }
 
     //当たった場合の処理(物理的な当たり判定)
@@ -36,11 +65,13 @@ public class CollisionManager : MonoBehaviour
         if (col.gameObject.tag == "Player1")
         {//ボールと1Pのラケットが当たった場合
             ball.SetBollState(1);
+            ball.SetMaxSpeed(NumStateWall(1));
             //Debug.Log("1Pに当たった");
         }
         else if (col.gameObject.tag == "Player2")
         {//ボールと2Pのラケットが当たった場合
             ball.SetBollState(2);
+            ball.SetMaxSpeed(NumStateWall(2));
             //Debug.Log("2Pに当たった");
         }
 
@@ -145,8 +176,30 @@ public class CollisionManager : MonoBehaviour
 			ball.ResetPosition();
 			ball.SetBollState(0);
 			ball.StartBall(2);   //2P側のほうへ
-
 		}
+    }
 
+
+    //指定された属性の壁の数を返す
+    int NumStateWall(int state)
+    {
+        int count = 0;
+        for (int i = 0; i < wallList.Count; i++)
+        {//同じ属性の壁を数える
+            if (state == wallList[i].GetWallState())
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    //全ての壁の属性を変更
+    void SetStateWallAll(int state)
+    {
+        for (int i = 0; i < wallList.Count; i++)
+        {
+            wallList[i].SetWallState(state);
+        }
     }
 }

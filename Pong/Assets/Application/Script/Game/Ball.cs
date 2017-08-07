@@ -13,10 +13,16 @@ public class Ball : MonoBehaviour
     private float angleCheckValueX = 7.0f; //角度調整に使ういい感じの数値
     private float angleCheckValueZ = 3.0f; //角度調整に使ういい感じの数値
 
-    private float SpeedUpValue = 1.1f;       //速度上昇倍率
-    private float SpeedDownValue = 0.9f;     //速度下降倍率
-    private float MaxSpeed = 150.0f;         //速度最大値
-    private float MinSpeed = 50.0f;          //速度最小値
+    [SerializeField]private float SpeedUpValue = 1.1f;       //速度上昇倍率
+    [SerializeField]private float SpeedDownValue = 0.9f;     //速度下降倍率
+    [SerializeField]private float MaxSpeed = 150.0f;         //速度上限
+    [SerializeField]private float MinSpeed = 50.0f;          //速度下限
+
+    //{//テスト運用
+    //壁の数だけ速度上限が上がる
+    public float MaxSpeedStanderd = 80.0f;  //速度上限基準値
+    public float MaxSpeedAddition = 3.0f;   //速度上限上昇値
+    //}
 
     private int m_State;			//0：無属性 //1：プレイヤ１ //2：プレイヤ２
 	private int StartInterval;      // スタートするまでのインターバル
@@ -148,12 +154,12 @@ public class Ball : MonoBehaviour
         if (m_rigidbody.velocity.magnitude > MaxSpeed)
         {
             m_rigidbody.velocity = m_rigidbody.velocity.normalized * MaxSpeed;
-            Debug.Log("[Ball.cs]最大値検知 修正後：" + m_rigidbody.velocity);
+            //Debug.Log("[Ball.cs]最大値検知 修正後：" + m_rigidbody.velocity);
         }
         if (m_rigidbody.velocity.magnitude < MinSpeed)
         {
             m_rigidbody.velocity = m_rigidbody.velocity.normalized * MinSpeed;
-            Debug.Log("[Ball.cs]最小値検知 修正後：" + m_rigidbody.velocity);
+            //Debug.Log("[Ball.cs]最小値検知 修正後：" + m_rigidbody.velocity);
         }
     }
 
@@ -231,4 +237,15 @@ public class Ball : MonoBehaviour
 		// ゲーム終了
 		GameSetFlag = true;
 	}
+
+    //最大速度設定(直接設定)
+    public void SetMaxSpeed(float speed)
+    {
+        MaxSpeed = speed;
+    }
+    //最大速度設定(要素だけ渡す)
+    public void SetMaxSpeed(int wallCount)
+    {
+        MaxSpeed = MaxSpeedStanderd + MaxSpeedAddition * wallCount;
+    }
 }
