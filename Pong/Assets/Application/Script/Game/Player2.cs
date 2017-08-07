@@ -7,7 +7,6 @@ public class Player2 : MonoBehaviour
 	//public class//
 	public ResultController resultcontroller;
 	public GaugeController gaugecontroller;
-	public float Speed;
 	public int Rote;
 
 	//private class//
@@ -23,7 +22,6 @@ public class Player2 : MonoBehaviour
 	void Start()
 	{
 		Set_Score = 0;
-		Speed = 1.5f;
 		Rote = 15;
 		MoveCount = 0;
 
@@ -44,7 +42,7 @@ public class Player2 : MonoBehaviour
 			// 一定以上長押しされたら移動
 			if (MoveCount >= DEFINE.MOVE_COUNT_MAX)
 			{
-				transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + Speed);
+				transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + DEFINE.PLAYER_MOVE_SPEED);
 
 				// 上限
 				if (transform.position.z > DEFINE.PLAYER_MOVE_MAX)
@@ -69,7 +67,7 @@ public class Player2 : MonoBehaviour
 			// 一定以上長押しされたら移動
 			if (MoveCount >= DEFINE.MOVE_COUNT_MAX)
 			{
-				transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - Speed);
+				transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - DEFINE.PLAYER_MOVE_SPEED);
 
 				// 下限
 				if (transform.position.z < -DEFINE.PLAYER_MOVE_MAX)

@@ -73,7 +73,7 @@ public class Gauge_Add : MonoBehaviour
 			Color color = Gauge.fillRect.GetComponent<Image>().color;
 
 			// アルファの値を徐々に減らす
-			Gauge.fillRect.GetComponent<Image>().color = new Color(color.r, color.g, color.b, color.a - 0.01f);
+			Gauge.fillRect.GetComponent<Image>().color = new Color(color.r, color.g, color.b, color.a - 0.005f);
 
 			if (color.a < 0.5f)
 			{
