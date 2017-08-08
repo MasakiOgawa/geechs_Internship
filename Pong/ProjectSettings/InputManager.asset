@@ -247,10 +247,10 @@ InputManager:
     joyNum: 2
   - serializedVersion: 3
     m_Name: Fire1
-    descriptiveName: joystick button 0
-    descriptiveNegativeName: joystick button 1
-    negativeButton: joystick button 2
-    positiveButton: joystick button 3
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: joystick button 0
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000

@@ -8,15 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Application/Scenes/TitleScene.unity
     guid: 99217b11cfaa14254893adf31c21413d
-  - enabled: 0
-    path: Assets/Application/Resources/Scenes/GameScene.unity
-    guid: 1fd9a0c39def9434f9dafcfed3a32886
   - enabled: 1
     path: Assets/Application/Scenes/GameScene.unity
-    guid: 42802de3c305843fc9f39a74d3aae4d0
-  - enabled: 0
-    path: Assets/Application/Resources/Scenes/ResultScene.unity
-    guid: ab41dee36ce7af04ca39b3187af48c58
+    guid: 1fd9a0c39def9434f9dafcfed3a32886
   - enabled: 1
     path: Assets/Application/Scenes/ResultScene.unity
-    guid: 02d0cb48f12a64c3ebf947bc7f192a00
+    guid: ab41dee36ce7af04ca39b3187af48c58

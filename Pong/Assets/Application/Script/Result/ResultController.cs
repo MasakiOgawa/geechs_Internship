@@ -2,12 +2,17 @@
 using System.Collections;
 
 public class ResultController : MonoBehaviour{
+	private bool FadeFlag;
 
-	/// <summary>
 	/// タイトルへ遷移する
 	/// </summary>
-	/// 
-	private bool FadeFlag;
+	private void Update()
+    {
+        if (Input.GetKey(KeyCode.Return))
+        {
+            Mgrs.sceneMgr.LoadScene(DEFINE.SCENE_TITLE);
+        }
+    }
 	
 	private void Update()
 	{

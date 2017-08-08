@@ -5,7 +5,7 @@ using UnityEngine;
 public class GoalAbsorption_Player02 : MonoBehaviour
 {
 
-    public float m_Frame = 30.0f;
+    public float m_Frame = 120.0f;
     private ParticleSystem particle;
     private bool m_StartFlag = false;
     private Vector3 m_FinishPos;
