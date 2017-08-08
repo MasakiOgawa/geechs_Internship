@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
 	private AudioSource SE_00;
 	private AudioSource SE_01;
 
+	private bool FadeFlag;
+
 	// Use this for initialization
 	void Start()
 	{
@@ -115,7 +117,13 @@ public class Player : MonoBehaviour
 		{
 			if (GameSetCount >= DEFINE.GAME_SET_COUNT)
 			{
-				Mgrs.sceneMgr.LoadScene(DEFINE.SCENE_RESULT);
+				//Mgrs.sceneMgr.LoadScene(DEFINE.SCENE_RESULT);
+				if (FadeFlag == false)
+				{
+					FadeManager.Instance.LoadScene(DEFINE.SCENE_RESULT, 0.5f);
+
+					FadeFlag = true;
+				}
 			}
 			else if (GameSetCount < DEFINE.GAME_SET_COUNT)
 			{

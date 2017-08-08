@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TitleController : MonoBehaviour {
+public class TitleController : MonoBehaviour
+{
+	private bool FadeFlag;
 
 	private void Start()
 	{
@@ -16,10 +18,15 @@ public class TitleController : MonoBehaviour {
 		{
 			Application.Quit();
 		}
-
-		if (Input.anyKey /*| Input.GetButtonDown("Fire1")*/)
+		if (FadeFlag == false)
 		{
-			Mgrs.sceneMgr.LoadScene(DEFINE.SCENE_PONG_GAME);
+			if (Input.anyKey /*| Input.GetButtonDown("Fire1")*/)
+			{
+				//Mgrs.sceneMgr.LoadScene(DEFINE.SCENE_PONG_GAME);
+				FadeManager.Instance.LoadScene(DEFINE.SCENE_PONG_GAME, 0.5f);
+
+				FadeFlag = true;
+			}
 		}
 	}
 }

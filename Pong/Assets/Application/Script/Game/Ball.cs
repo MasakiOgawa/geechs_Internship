@@ -13,15 +13,15 @@ public class Ball : MonoBehaviour
     private float angleCheckValueX = 7.0f; //角度調整に使ういい感じの数値
     private float angleCheckValueZ = 3.0f; //角度調整に使ういい感じの数値
 
-    [SerializeField]private float SpeedUpValue = 1.1f;       //速度上昇倍率
+    [SerializeField]private float SpeedUpValue = 1.2f;       //速度上昇倍率
     [SerializeField]private float SpeedDownValue = 0.9f;     //速度下降倍率
     [SerializeField]private float MaxSpeed = 150.0f;         //速度上限
-    [SerializeField]private float MinSpeed = 50.0f;          //速度下限
+    [SerializeField]private float MinSpeed = 60.0f;          //速度下限
 
     //{//テスト運用
     //壁の数だけ速度上限が上がる
-    public float MaxSpeedStanderd = 80.0f;  //速度上限基準値
-    public float MaxSpeedAddition = 3.0f;   //速度上限上昇値
+    public float MaxSpeedStanderd = 100.0f;  //速度上限基準値
+    public float MaxSpeedAddition = 4.0f;   //速度上限上昇値
     //}
 
     private int m_State;			//0：無属性 //1：プレイヤ１ //2：プレイヤ２
