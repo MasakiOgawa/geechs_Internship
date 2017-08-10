@@ -1,0 +1,50 @@
+Initialize engine version: 5.6.2f1 (a2913c821e27)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GTX 950M (ID=0x139a)
+    Vendor:   NVIDIA
+    VRAM:     2019 MB
+    Driver:   22.21.13.8205
+Begin MonoManager ReloadAssembly
+Platform assembly: D:\ogawa\Desktop\Unity\geechs\Pong\陣取りPONG_マスター版Ver.2.0_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading D:\ogawa\Desktop\Unity\geechs\Pong\陣取りPONG_マスター版Ver.2.0_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: D:\ogawa\Desktop\Unity\geechs\Pong\陣取りPONG_マスター版Ver.2.0_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading D:\ogawa\Desktop\Unity\geechs\Pong\陣取りPONG_マスター版Ver.2.0_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: D:\ogawa\Desktop\Unity\geechs\Pong\陣取りPONG_マスター版Ver.2.0_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading D:\ogawa\Desktop\Unity\geechs\Pong\陣取りPONG_マスター版Ver.2.0_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: D:\ogawa\Desktop\Unity\geechs\Pong\陣取りPONG_マスター版Ver.2.0_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading D:\ogawa\Desktop\Unity\geechs\Pong\陣取りPONG_マスター版Ver.2.0_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+- Completed reload, in  0.023 seconds
+Platform assembly: D:\ogawa\Desktop\Unity\geechs\Pong\陣取りPONG_マスター版Ver.2.0_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: D:\ogawa\Desktop\Unity\geechs\Pong\陣取りPONG_マスター版Ver.2.0_Data\Managed\System.dll (this message is harmless)
+<RI> Initializing input.
+<RI> Input initialized.
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+<RI> Initialized touch support.
+The referenced script on this Behaviour is missing!
+ 
+(Filename:  Line: 1514)
+
+The referenced script on this Behaviour (Game Object 'FadeManager') is missing!
+ 
+(Filename:  Line: 1743)
+
+UnloadTime: 1.355107 ms
+The referenced script on this Behaviour is missing!
+ 
+(Filename:  Line: 1514)
+
+The referenced script on this Behaviour (Game Object 'FadeManager') is missing!
+ 
+(Filename:  Line: 1743)
+
+Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 3.790281 ms
+
+Unloading 16 unused Assets to reduce memory usage. Loaded Objects now: 741.
+Total: 1.154468 ms (FindLiveObjects: 0.071228 ms CreateObjectMapping: 0.017983 ms MarkObjects: 0.344859 ms  DeleteObjects: 0.718633 ms)
+
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 1c10 -> priority: 1 
+  Thread -> id: 4360 -> priority: 1 

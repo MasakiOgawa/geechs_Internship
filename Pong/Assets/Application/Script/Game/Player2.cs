@@ -5,12 +5,13 @@ using UnityEngine;
 public class Player2 : MonoBehaviour
 {
 	//public class//
-	public ResultController resultcontroller;
 	public GaugeController gaugecontroller;
 	public float Speed;
 	public int Rote;
 
 	//private class//
+	[SerializeField] private GameObject EffectStrong;
+
 	private static int Set_Score;
 	private int MoveCount;			// プレイヤーが動き出す時間計測用
 	private bool GameSetFlag;		// ゲーム終了フラグ
@@ -162,6 +163,8 @@ public class Player2 : MonoBehaviour
 				rb.velocity *= DEFINE.BALL_SPEED_UP;
 
 				SE_00.PlayOneShot(SE_00.clip);
+
+				Instantiate(EffectStrong, transform.position, Quaternion.Euler(0, 90, 0), transform);
 			}
 		}
 	}

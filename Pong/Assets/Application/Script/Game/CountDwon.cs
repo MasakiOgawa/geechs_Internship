@@ -10,6 +10,11 @@ public class CountDwon : MonoBehaviour
 	[SerializeField]
 	private Ball ball;                  // ボール情報
 	private AudioSource SE_00;
+	private AudioSource SE_01;
+	private AudioSource SE_02;
+
+	public bool Flag;
+	private int Count;
 
 	// Use this for initialization
 	void Start()
@@ -18,10 +23,11 @@ public class CountDwon : MonoBehaviour
 		CountDownAnim = GetComponent<Animator>();
 
 		GameStart = false;              // ゲームスタートフラグ
-		SE_00 = GetComponent<AudioSource>();
-
-		SE_00.PlayOneShot(SE_00.clip);
-	}
+		AudioSource[] audio = GetComponents<AudioSource>();
+		SE_00 = audio[0];
+		SE_01 = audio[1];
+		SE_02 = audio[2];
+ 	}
 
 	// Update is called once per frame
 	void Update()
@@ -38,7 +44,30 @@ public class CountDwon : MonoBehaviour
 
 				// ボールスタート
 				ball.StartBall(0);
+
+				SE_02.Play();
+				SE_02.loop = true;
 			}
 		}
+
+		if (Flag == true)
+		{
+			if (Count <= 2)
+			{
+				SE_00.PlayOneShot(SE_00.clip);
+				Flag = false;
+			}
+			else if (Count == 3)
+			{
+				SE_01.PlayOneShot(SE_01.clip);
+				Flag = false;
+			}
+
+			if (Count < 4)
+			{
+				Count++;
+			}
+		}
+		
 	}
 }
